@@ -1,0 +1,13 @@
+{
+  "name": "mirror-moon",
+  "version": "1.0.0",
+  "description": "AI-driven infinite-flow horror otome game",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=8080"
+  },
+  "keywords": ["horror", "otome", "game", "web"],
+  "author": "",
+  "license": "MIT"
+}

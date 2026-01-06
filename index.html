@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mirror Moon - 镜之月</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loading-content">
+                <h1 class="game-title">镜之月</h1>
+                <div class="loading-spinner"></div>
+                <p class="loading-text">加载中...</p>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="hidden">
+            <div class="menu-content">
+                <h1 class="game-title">镜之月</h1>
+                <nav class="menu-buttons">
+                    <button class="menu-btn" id="btn-start">开始游戏</button>
+                    <button class="menu-btn" id="btn-continue">继续游戏</button>
+                    <button class="menu-btn" id="btn-settings">设置</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div id="game-container" class="hidden">
+            <!-- Status Bar -->
+            <div id="status-bar">
+                <div class="status-item">
+                    <span class="status-icon">❤️</span>
+                    <div class="status-bar-wrapper">
+                        <div class="status-bar-fill health-bar"></div>
+                    </div>
+                    <span class="status-value" id="health-value">100</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">🧠</span>
+                    <div class="status-bar-wrapper">
+                        <div class="status-bar-fill sanity-bar"></div>
+                    </div>
+                    <span class="status-value" id="sanity-value">100</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">⚡</span>
+                    <div class="status-bar-wrapper">
+                        <div class="status-bar-fill energy-bar"></div>
+                    </div>
+                    <span class="status-value" id="energy-value">100</span>
+                </div>
+            </div>
+
+        <!-- Surface World (表世界 - 竖屏主界面) -->
+        <div id="surface-world">
+            <!-- 场景背景层 -->
+            <div class="scene-background">
+                <!-- 天空 -->
+                <div class="sky"></div>
+                
+                <!-- 月亮 -->
+                <div class="moon"></div>
+                
+                <!-- 星星容器 -->
+                <div class="stars"></div>
+                
+                <!-- 椭圆形镜子 -->
+                <div class="mirror-container">
+                    <div class="mirror-frame-border"></div>
+                    <div class="mirror-frame">
+                        <div class="mirror-glass"></div>
+                        <div class="mirror-reflection"></div>
+                    </div>
+                </div>
+                
+                <!-- 浅水地面 -->
+                <div class="water-surface">
+                    <div class="water-moon-reflection"></div>
+                    <div class="water-ripples"></div>
+                </div>
+            </div>
+
+            <!-- UI层 -->
+            <div class="ui-layer">
+                <!-- 顶部信息 -->
+                <div class="top-ui">
+                    <div class="location-info">
+                        <h2 id="current-location">新城区 · 战略局总部</h2>
+                        <div class="location-time" id="game-time">第1天 08:00</div>
+                    </div>
+
+                    <!-- 简化的状态栏 -->
+                    <div class="mini-status-bar">
+                        <div class="mini-status-item">
+                            <span>❤️</span>
+                            <span id="mini-health">100</span>
+                        </div>
+                        <div class="mini-status-item">
+                            <span>🧠</span>
+                            <span id="mini-sanity">100</span>
+                        </div>
+                        <div class="mini-status-item">
+                            <span>⚡</span>
+                            <span id="mini-energy">100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 副本入口按钮 -->
+                <div class="dungeon-entrance">
+                    <button class="dungeon-btn chinese" data-type="chinese">
+                        <span class="btn-icon">🏮</span>
+                        <span class="btn-text">进入古宅惊魂</span>
+                    </button>
+                    <button class="dungeon-btn western" data-type="western">
+                        <span class="btn-icon">🎭</span>
+                        <span class="btn-text">进入废弃剧院</span>
+                    </button>
+                    <button class="dungeon-btn cthulhu" data-type="cthulhu">
+                        <span class="btn-icon">🐙</span>
+                        <span class="btn-text">进入深渊凝视</span>
+                    </button>
+                </div>
+
+                <!-- 底部导航 -->
+                <div class="bottom-nav">
+                    <button class="nav-btn active" data-section="home">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-label">主页</span>
+                    </button>
+                    <button class="nav-btn" data-section="characters">
+                        <span class="nav-icon">👥</span>
+                        <span class="nav-label">角色</span>
+                    </button>
+                    <button class="nav-btn" data-section="inventory">
+                        <span class="nav-icon">🎒</span>
+                        <span class="nav-label">背包</span>
+                    </button>
+                    <button class="nav-btn" data-section="rest">
+                        <span class="nav-icon">🛏️</span>
+                        <span class="nav-label">休息</span>
+                    </button>
+                    <button class="nav-btn" data-section="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-label">设置</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+            <!-- Inner World (里世界 - 横屏副本) -->
+            <div id="inner-world" class="hidden">
+                <!-- Action Buttons -->
+                <div class="inner-world-actions">
+                    <button id="btn-return" class="action-btn">返回表世界</button>
+                    <button id="btn-map" class="action-btn">查看地图</button>
+                    <button id="btn-explore" class="action-btn">360°探索</button>
+                </div>
+
+                <!-- Character Display (for Live2D) -->
+                <div id="character-container">
+                    <canvas id="live2d-canvas"></canvas>
+                </div>
+
+                <!-- Chat/Dialogue Area -->
+                <div id="chat-container">
+                    <div id="chat-messages"></div>
+                    <div id="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="输入对话或指令...">
+                        <button id="send-btn">发送</button>
+                    </div>
+                </div>
+
+                <!-- Map Container -->
+                <div id="map-container" class="hidden">
+                    <canvas id="map-canvas"></canvas>
+                    <button id="close-map" class="close-btn">关闭</button>
+                </div>
+
+                <!-- 360° Environment View -->
+                <div id="environment-view" class="hidden">
+                    <div id="scene-viewer"></div>
+                    <div class="view-controls">
+                        <button id="rotate-left">←</button>
+                        <button id="rotate-right">→</button>
+                    </div>
+                    <button id="close-environment" class="close-btn">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
